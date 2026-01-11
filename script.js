@@ -194,3 +194,4 @@ if (introScreen && introSound) {
 document.getElementById("liveStrength").style.display = "none";
 document.getElementById("liveCrackTime").style.display = "none";
 
+
