@@ -105,7 +105,7 @@ async function scan() {
   document.getElementById("loader").style.display = "block";
 
   try {
-    const response = await fetch(" https://unpliable-discouragingly-jeni.ngrok-free.dev/scan", {
+    const response = await fetch("https://cyberbuddy-2-0-1.onrender.com/scan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: input, mode: mode }),
@@ -165,33 +165,6 @@ async function scan() {
   document.getElementById("loader").style.display = "none";
 }
 
-// ---------- INTRO SOUND + SHIELD ----------
-const introScreen = document.getElementById("introScreen");
-const introSound = document.getElementById("introSound");
-
-if (introScreen && introSound) {
-  introScreen.addEventListener("click", () => {
-    introSound.muted = false;
-    introSound.volume = 0.7;
-
-    introSound.play()
-      .then(() => {
-        console.log("Sound playing");
-      })
-      .catch(err => {
-        console.log("Sound blocked:", err);
-      });
-
-    introScreen.style.animation = "fadeOut 1s ease forwards";
-
-    setTimeout(() => {
-      introScreen.style.display = "none";
-    }, 1000);
-  });
-}
-
 // Hide live UI initially
 document.getElementById("liveStrength").style.display = "none";
 document.getElementById("liveCrackTime").style.display = "none";
-
-
