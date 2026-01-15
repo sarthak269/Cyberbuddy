@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  word-break: break-word;
 }
 
 body {
@@ -85,6 +86,7 @@ textarea {
   background: #1d4ed8;
 }
 
+/* 🔥 FIXED RESULT CARD */
 .result-card {
   margin-top: 20px;
   background: #020617;
@@ -93,11 +95,27 @@ textarea {
   border-radius: 10px;
   text-align: left;
   white-space: pre-wrap;
-  word-wrap: break-word;
   overflow-wrap: break-word;
   max-width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
   overflow-x: hidden;
   font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Sexy scrollbar */
+.result-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.result-card::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+.result-card::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
 }
 
 /* Loader */
@@ -160,6 +178,7 @@ textarea {
   overflow-y: auto;
   padding-right: 5px;
 }
+
 #introScreen {
   position: fixed;
   top: 0;
@@ -201,6 +220,7 @@ textarea {
     visibility: hidden;
   }
 }
+
 #particles {
   position: fixed;
   top: 0;
@@ -209,6 +229,7 @@ textarea {
   height: 100%;
   z-index: -1;
 }
+
 #tapText {
   margin-top: 15px;
   color: #94a3b8;
@@ -220,10 +241,3 @@ textarea {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
 }
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
