@@ -3,48 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>CyberBuddy</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- IMPORTANT -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<audio id="introSound" src="zzz.mp3" preload="auto"></audio>
-
-<canvas id="particles"></canvas>
-
-<div id="introScreen">
-  <p id="tapText">Tap to Enter</p>
-  <div class="shield">🛡️</div>
-  <h2>CyberBuddy</h2>
-</div>
 
 <div class="container">
   <h1>CyberBuddy 🛡️</h1>
   <p class="tagline">Your AI Cyber Safety Assistant</p>
 
-  <!-- Tabs -->
   <div class="tabs">
-    <button onclick="setMode('phishing')" id="phishingTab">Phishing Scan</button>
-    <button onclick="setMode('password')" id="passwordTab">Password Check</button>
-    <button onclick="setMode('internship')" id="internshipTab">Internship Check</button>
+    <button onclick="setMode('phishing')">Phishing Scan</button>
+    <button onclick="setMode('password')">Password Check</button>
+    <button onclick="setMode('internship')">Internship Check</button>
   </div>
 
-  <!-- Input Card -->
   <div class="card">
     <textarea id="inputBox" placeholder="Enter text here..."></textarea>
-
-    <!-- LIVE PASSWORD FEEDBACK -->
-    <div id="liveStrength" style="margin-top:10px;"></div>
-    <div id="liveCrackTime" style="margin-top:5px; color:#94a3b8;"></div>
-
     <button class="scan-btn" onclick="scan()">Scan</button>
   </div>
 
-  <!-- Loader -->
   <div id="loader" class="loader" style="display:none;"></div>
 
-  <!-- Result Wrapper -->
-  <div id="resultWrapper">
+  <div class="result-wrapper">
     <div id="result" class="result-card"></div>
   </div>
 </div>
