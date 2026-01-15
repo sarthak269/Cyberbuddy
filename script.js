@@ -105,7 +105,7 @@ async function scan() {
   document.getElementById("loader").style.display = "block";
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/scan", {
+    const response = await fetch("https://cyberbuddy-2-0-1.onrender.com", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: input, mode: mode }),
@@ -193,3 +193,4 @@ if (introScreen && introSound) {
 // Hide live UI initially
 document.getElementById("liveStrength").style.display = "none";
 document.getElementById("liveCrackTime").style.display = "none";
+
