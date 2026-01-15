@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  max-width: 100%;
 }
 
 body {
@@ -9,6 +8,7 @@ body {
   color: #fff;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .container {
@@ -16,6 +16,8 @@ body {
   margin: 40px auto;
   text-align: center;
   padding: 0 15px;
+  position: relative;
+  z-index: 2;
 }
 
 h1 {
@@ -31,11 +33,11 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  gap: 8px;
 }
 
 .tabs button {
   flex: 1;
+  margin: 0 5px;
   padding: 10px;
   background: #0f172a;
   color: #fff;
@@ -84,44 +86,23 @@ textarea {
 
 .scan-btn:hover {
   background: #1d4ed8;
+  transform: translateY(-1px);
 }
 
-/* 🔥 FINAL FIXED RESULT CARD */
 .result-card {
   margin-top: 20px;
   background: #020617;
   border: 1px solid #1e293b;
-  padding: 15px 30px 15px 18px; /* right side extra space */
+  padding: 15px;
   border-radius: 10px;
   text-align: left;
-
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-
-  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   max-width: 100%;
-  max-height: 240px;
-
-  overflow-y: auto;
   overflow-x: hidden;
-
   font-size: 14px;
   line-height: 1.6;
-}
-
-/* Scrollbar fix */
-.result-card::-webkit-scrollbar {
-  width: 8px;
-}
-
-.result-card::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.result-card::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 10px;
 }
 
 /* Loader */
@@ -179,6 +160,13 @@ textarea {
   transition: all 0.3s ease;
 }
 
+#explanationBox {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* INTRO SCREEN */
 #introScreen {
   position: fixed;
   top: 0;
@@ -191,19 +179,25 @@ textarea {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeOut 1s ease forwards;
-  animation-delay: 2s;
 }
 
 .shield {
   font-size: 80px;
-  animation: shieldPop 1.5s ease;
+  animation: shieldPop 1.2s ease;
 }
 
 @keyframes shieldPop {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeOut {
@@ -213,15 +207,7 @@ textarea {
   }
 }
 
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-}
-
+/* Tap to Enter */
 #tapText {
   margin-top: 15px;
   color: #94a3b8;
@@ -232,4 +218,14 @@ textarea {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+/* Particles canvas */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
