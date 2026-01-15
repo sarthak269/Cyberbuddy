@@ -4,28 +4,34 @@
 }
 
 body {
-  background: #020617;
+  background: linear-gradient(135deg, #020617, #020617);
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
   margin: 0;
+  padding: 0;
 }
 
 .container {
   max-width: 600px;
   margin: 40px auto;
-  padding: 0 15px;
   text-align: center;
+  padding: 0 15px;
+}
+
+h1 {
+  font-size: 2.5rem;
 }
 
 .tagline {
   color: #94a3b8;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .tabs {
   display: flex;
-  gap: 8px;
+  justify-content: space-between;
   margin-bottom: 20px;
+  gap: 8px;
 }
 
 .tabs button {
@@ -36,6 +42,11 @@ body {
   border: 1px solid #1e293b;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.tabs button:hover {
+  background: #1e293b;
 }
 
 .card {
@@ -43,6 +54,8 @@ body {
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #1e293b;
+  width: 100%;
+  overflow: hidden;
 }
 
 textarea {
@@ -54,6 +67,8 @@ textarea {
   border-radius: 8px;
   padding: 10px;
   resize: none;
+  outline: none;
+  font-size: 14px;
 }
 
 .scan-btn {
@@ -64,19 +79,19 @@ textarea {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
 }
 
-.result-wrapper {
-  width: 100%;
-  overflow: hidden;
+.scan-btn:hover {
+  background: #1d4ed8;
 }
 
-/* 🔥 FINAL RESULT FIX */
+/* 🔥 FINAL FIXED RESULT CARD */
 .result-card {
   margin-top: 20px;
   background: #020617;
   border: 1px solid #1e293b;
-  padding: 15px 28px 15px 18px; /* extra right space */
+  padding: 15px 30px 15px 18px; /* right side extra space */
   border-radius: 10px;
   text-align: left;
 
@@ -85,6 +100,7 @@ textarea {
   overflow-wrap: anywhere;
 
   width: 100%;
+  max-width: 100%;
   max-height: 240px;
 
   overflow-y: auto;
@@ -94,8 +110,13 @@ textarea {
   line-height: 1.6;
 }
 
+/* Scrollbar fix */
 .result-card::-webkit-scrollbar {
   width: 8px;
+}
+
+.result-card::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .result-card::-webkit-scrollbar-thumb {
@@ -117,4 +138,98 @@ textarea {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.safe {
+  background: #16a34a;
+  color: white;
+}
+
+.suspicious {
+  background: #facc15;
+  color: black;
+}
+
+.phishing {
+  background: #dc2626;
+  color: white;
+}
+
+/* Animations */
+.pop-in {
+  animation: popIn 0.4s ease-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#liveStrength, #liveCrackTime {
+  transition: all 0.3s ease;
+}
+
+#introScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #020617;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 2s;
+}
+
+.shield {
+  font-size: 80px;
+  animation: shieldPop 1.5s ease;
+}
+
+@keyframes shieldPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#tapText {
+  margin-top: 15px;
+  color: #94a3b8;
+  font-size: 14px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
