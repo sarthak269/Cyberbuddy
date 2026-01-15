@@ -96,6 +96,20 @@ function toggleExplanation() {
   box.style.display = (box.style.display === "none") ? "block" : "none";
 }
 
+// ---------- SAFE TEXT RENDER (NO CUT ISSUE) ----------
+function safeRender(text) {
+  return `
+    <div style="
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+    ">
+      ${text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>")}
+    </div>
+  `;
+}
+
 // ---------- MAIN SCAN ----------
 async function scan() {
   const input = document.getElementById("inputBox").value;
@@ -105,14 +119,14 @@ async function scan() {
   document.getElementById("loader").style.display = "block";
 
   try {
-    const response = await fetch("https://cyberbuddy-2-0-1.onrender.com", {
+    const response = await fetch("https://cyberbuddy-2-0-1.onrender.com/scan", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: input, mode: mode }),
     });
 
     const data = await response.json();
-    let output = data.result || data.error;
+    let output = data.result || data.error || "No response";
     let badge = "";
 
     if (mode === "password") {
@@ -136,7 +150,7 @@ async function scan() {
         <p><strong>${summary}</strong></p>
         <button class="scan-btn" onclick="toggleExplanation()">See Explanation</button>
         <div id="explanationBox" style="display:none; margin-top:10px;">
-          <pre>${output}</pre>
+          ${safeRender(output)}
         </div>
       `;
     } 
@@ -151,7 +165,7 @@ async function scan() {
         badge = `<div class="badge phishing">PHISHING</div>`;
       }
 
-      resultBox.innerHTML = badge + "<pre>" + output + "</pre>";
+      resultBox.innerHTML = badge + safeRender(output);
     }
 
     resultBox.classList.remove("pop-in");
@@ -174,13 +188,7 @@ if (introScreen && introSound) {
     introSound.muted = false;
     introSound.volume = 0.7;
 
-    introSound.play()
-      .then(() => {
-        console.log("Sound playing");
-      })
-      .catch(err => {
-        console.log("Sound blocked:", err);
-      });
+    introSound.play().catch(() => {});
 
     introScreen.style.animation = "fadeOut 1s ease forwards";
 
@@ -193,4 +201,3 @@ if (introScreen && introSound) {
 // Hide live UI initially
 document.getElementById("liveStrength").style.display = "none";
 document.getElementById("liveCrackTime").style.display = "none";
-
