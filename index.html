@@ -8,28 +8,51 @@
 </head>
 <body>
 
-<div class="container">
-  <h1>CyberBuddy 🛡️</h1>
-  <p class="tagline">Your AI Cyber Safety Assistant</p>
+  <!-- Particle Background -->
+  <canvas id="particles"></canvas>
 
-  <div class="tabs">
-    <button onclick="setMode('phishing')">Phishing Scan</button>
-    <button onclick="setMode('password')">Password Check</button>
-    <button onclick="setMode('internship')">Internship Check</button>
+  <!-- Intro Screen -->
+  <div id="introScreen">
+    <div class="shield">🛡️</div>
+    <h2>CyberBuddy</h2>
+    <p id="tapText">Tap to Enter</p>
   </div>
 
-  <div class="card">
-    <textarea id="inputBox" placeholder="Enter text here..."></textarea>
-    <button class="scan-btn" onclick="scan()">Scan</button>
-  </div>
+  <!-- Intro Sound -->
+  <audio id="introSound" src="zzz.mp3" preload="auto"></audio>
 
-  <div id="loader" class="loader" style="display:none;"></div>
+  <!-- Main Container -->
+  <div class="container">
+    <h1>CyberBuddy 🛡️</h1>
+    <p class="tagline">Your AI Cyber Safety Assistant</p>
 
-  <div class="result-wrapper">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button onclick="setMode('phishing')" id="phishingTab">Phishing Scan</button>
+      <button onclick="setMode('password')" id="passwordTab">Password Check</button>
+      <button onclick="setMode('internship')" id="internshipTab">Internship Check</button>
+    </div>
+
+    <!-- Input Card -->
+    <div class="card">
+      <textarea id="inputBox" placeholder="Enter text here..."></textarea>
+
+      <!-- Live Password Feedback -->
+      <div id="liveStrength" style="margin-top:10px;"></div>
+      <div id="liveCrackTime" style="margin-top:5px; color:#94a3b8;"></div>
+
+      <!-- Buttons -->
+      <button class="scan-btn" onclick="scan()">Scan</button>
+      <button class="scan-btn" onclick="generatePassword()">Generate Strong Password</button>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display:none;"></div>
+
+    <!-- Result -->
     <div id="result" class="result-card"></div>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
