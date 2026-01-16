@@ -4,17 +4,25 @@ let mode = "phishing";
 function setMode(selectedMode) {
   mode = selectedMode;
 
+  // Clear input & output
   document.getElementById("result").innerHTML = "";
   document.getElementById("inputBox").value = "";
 
+  // Clear live content
+  document.getElementById("liveStrength").innerHTML = "";
+  document.getElementById("liveCrackTime").innerHTML = "";
+
+  // Hide live UI by default
   document.getElementById("liveStrength").style.display = "none";
   document.getElementById("liveCrackTime").style.display = "none";
 
+  // Show only in password mode
   if (mode === "password") {
     document.getElementById("liveStrength").style.display = "block";
     document.getElementById("liveCrackTime").style.display = "block";
   }
 
+  // Reset tab colors
   document.querySelectorAll(".tabs button").forEach(btn => {
     btn.style.background = "#0f172a";
   });
@@ -93,10 +101,11 @@ function generatePassword() {
 // ---------- TOGGLE EXPLANATION ----------
 function toggleExplanation() {
   const box = document.getElementById("explanationBox");
+  if (!box) return;
   box.style.display = (box.style.display === "none") ? "block" : "none";
 }
 
-// ---------- SAFE TEXT RENDER (NO CUT ISSUE) ----------
+// ---------- SAFE TEXT RENDER ----------
 function safeRender(text) {
   return `
     <div style="
@@ -179,7 +188,7 @@ async function scan() {
   document.getElementById("loader").style.display = "none";
 }
 
-// ---------- INTRO SOUND + SHIELD ----------
+// ---------- INTRO SOUND ----------
 const introScreen = document.getElementById("introScreen");
 const introSound = document.getElementById("introSound");
 
@@ -187,9 +196,7 @@ if (introScreen && introSound) {
   introScreen.addEventListener("click", () => {
     introSound.muted = false;
     introSound.volume = 0.7;
-
     introSound.play().catch(() => {});
-
     introScreen.style.animation = "fadeOut 1s ease forwards";
 
     setTimeout(() => {
