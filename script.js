@@ -12,14 +12,16 @@ function setMode(selectedMode) {
   document.getElementById("liveStrength").innerHTML = "";
   document.getElementById("liveCrackTime").innerHTML = "";
 
-  // Hide live UI by default
+  // Hide everything by default
   document.getElementById("liveStrength").style.display = "none";
   document.getElementById("liveCrackTime").style.display = "none";
+  document.getElementById("generateBtn").style.display = "none"; // 🔥
 
   // Show only in password mode
   if (mode === "password") {
     document.getElementById("liveStrength").style.display = "block";
     document.getElementById("liveCrackTime").style.display = "block";
+    document.getElementById("generateBtn").style.display = "block"; // 🔥
   }
 
   // Reset tab colors
@@ -54,13 +56,11 @@ function analyzePasswordLive(password) {
     strength = "Weak";
     crackTime = "Few minutes to hours";
     colorClass = "phishing";
-  } 
-  else if (score === 3 || score === 4) {
+  } else if (score === 3 || score === 4) {
     strength = "Medium";
     crackTime = "Few days to months";
     colorClass = "suspicious";
-  } 
-  else if (score === 5) {
+  } else if (score === 5) {
     strength = "Strong";
     crackTime = "Years to centuries";
     colorClass = "safe";
@@ -144,12 +144,10 @@ async function scan() {
       if (output.toLowerCase().includes("weak")) {
         badge = `<div class="badge phishing">WEAK</div>`;
         summary = "Your password is Weak";
-      } 
-      else if (output.toLowerCase().includes("medium")) {
+      } else if (output.toLowerCase().includes("medium")) {
         badge = `<div class="badge suspicious">MEDIUM</div>`;
         summary = "Your password is Medium";
-      } 
-      else if (output.toLowerCase().includes("strong")) {
+      } else if (output.toLowerCase().includes("strong")) {
         badge = `<div class="badge safe">STRONG</div>`;
         summary = "Your password is Strong";
       }
@@ -162,15 +160,12 @@ async function scan() {
           ${safeRender(output)}
         </div>
       `;
-    } 
-    else {
+    } else {
       if (output.toLowerCase().includes("safe")) {
         badge = `<div class="badge safe">SAFE</div>`;
-      } 
-      else if (output.toLowerCase().includes("suspicious")) {
+      } else if (output.toLowerCase().includes("suspicious")) {
         badge = `<div class="badge suspicious">SUSPICIOUS</div>`;
-      } 
-      else if (output.toLowerCase().includes("phishing") || output.toLowerCase().includes("fake")) {
+      } else if (output.toLowerCase().includes("phishing") || output.toLowerCase().includes("fake")) {
         badge = `<div class="badge phishing">PHISHING</div>`;
       }
 
@@ -205,6 +200,5 @@ if (introScreen && introSound) {
   });
 }
 
-// Hide live UI initially
-document.getElementById("liveStrength").style.display = "none";
-document.getElementById("liveCrackTime").style.display = "none";
+// ---------- INITIAL STATE ----------
+setMode("phishing");
